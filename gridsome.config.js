@@ -15,7 +15,7 @@ module.exports = {
   },
 
   templates: {
-    Post: '/blog/:path',
+    Post: '/:path',
     Tag: '/tag/:id',
   },
 

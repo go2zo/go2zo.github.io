@@ -3,7 +3,7 @@ title: Gridsome으로 Blog 만들기 (1) - 환경 설정
 path: make-blog-with-gridsome-1
 date: 2020-11-10
 published: true
-tags: ['Vue.js', 'Gridsome']
+tags: ['blog', 'gridsome']
 series: false
 canonical_url: false
 description: "Vue.js 기반 정적 사이트 생성기(Static Site Generator, SSG)인 Gridsome을 이용해 프로젝트를 생성하고 초기 개발 환경을 구성한다."

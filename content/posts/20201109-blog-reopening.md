@@ -3,7 +3,7 @@ title: Blog 새단장
 path: blog-reopening
 date: 2020-11-09
 published: true
-tags: ['Vue.js', 'Gridsome']
+tags: [blog]
 series: false
 cover_image: ./images/dummy.jpg
 canonical_url: false

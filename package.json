@@ -1,10 +1,10 @@
 {
-  "name": "bulma",
+  "name": "gridsome-go2zo-blog",
   "private": true,
   "scripts": {
     "build": "gridsome build",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d dist",
+    "deploy": "gridsome build && gh-pages -d dist",
     "develop": "gridsome develop",
     "explore": "gridsome explore",
     "lint": "eslint --ext .js,.vue src/ --fix"
