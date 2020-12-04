@@ -14,13 +14,18 @@ HEADER="#
 # ----------------------"
 
 recent_commits() {
-    echo "${HEADER}"
-    echo "${COMMITS}"
+  echo "${HEADER}"
+  echo "${COMMITS}"
 }
 
+GH_CLI_PATH=`command -v gh 2>&1 >/dev/null`
+COMMIT_MSG=""
+if [ -z "${GH_CLI_PATH}" ]; then
+  COMMIT_MSG=`gh issue view ${cut_number} | sed -n $'s/^title:[ \t]*//p'`
+fi
 # if commit_msg_file's first line is empty,
 # add branch name in commit_msg
-if [ -z "$first_line" ]; then
-    recent_commits >> $1
-    sed -i ".bak" "1s/^/[#$cut_number] /" $1
+if [ -z "${first_line}" ]; then
+  recent_commits >> $1
+  sed -i ".bak" "1s/^/[#${cut_number}] ${COMMIT_MSG}/" $1
 fi

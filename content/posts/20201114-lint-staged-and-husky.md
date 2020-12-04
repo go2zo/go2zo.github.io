@@ -100,8 +100,6 @@ fi
 | $2    | COMMIT_SOURCE   | merge, message, template, commit 등 커밋의 종류를 나타낸다.  |
 | $3    | SHA             | 최근 커밋 수정(commit -amend)의 경우에는 커밋 hash 값을 추가로 받는다. |
 
-
-
 # References
 
 - <https://www.huskyhoochu.com/npm-husky-the-git-hook-manager/>
