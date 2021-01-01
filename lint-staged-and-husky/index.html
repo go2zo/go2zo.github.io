@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html data-html-server-rendered="true" lang="en" data-vue-tag="%7B%22lang%22:%7B%22ssr%22:%22en%22%7D%7D">
+  <head>
+    <title>Lint-staged와 Husky를 이용해 자동화 하기 - Go2zo</title><meta name="gridsome:hash" content="12c81b4eaf125a746d2dbc36b277a349e8c9fed6"><meta data-vue-tag="ssr" charset="utf-8"><meta data-vue-tag="ssr" name="generator" content="Gridsome v0.7.23"><meta data-vue-tag="ssr" data-key="viewport" name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta data-vue-tag="ssr" data-key="format-detection" name="format-detection" content="telephone=no"><meta data-vue-tag="ssr" data-key="description" name="description" content="Simple is the best."><meta data-vue-tag="ssr" name="description" content="lint-staged와 husky를 이용해 eslint와 커밋 메시지에 issue 번호 지정을 자동화 한다."><link data-vue-tag="ssr" rel="icon" href="data:,"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="16x16" href="/assets/static/favicon.ce0531f.9bb7ffafafc09ac851d81afb65b8ef59.png"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="32x32" href="/assets/static/favicon.ac8d93a.9bb7ffafafc09ac851d81afb65b8ef59.png"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="96x96" href="/assets/static/favicon.b9532cc.9bb7ffafafc09ac851d81afb65b8ef59.png"><link data-vue-tag="ssr" rel="apple-touch-icon" type="image/png" sizes="76x76" href="/assets/static/favicon.f22e9f3.9bb7ffafafc09ac851d81afb65b8ef59.png"><link data-vue-tag="ssr" rel="apple-touch-icon" type="image/png" sizes="152x152" href="/assets/static/favicon.62d22cb.9bb7ffafafc09ac851d81afb65b8ef59.png"><link data-vue-tag="ssr" rel="apple-touch-icon" type="image/png" sizes="120x120" href="/assets/static/favicon.1539b60.9bb7ffafafc09ac851d81afb65b8ef59.png"><link data-vue-tag="ssr" rel="apple-touch-icon" type="image/png" sizes="167x167" href="/assets/static/favicon.dc0cdc5.9bb7ffafafc09ac851d81afb65b8ef59.png"><link data-vue-tag="ssr" rel="apple-touch-icon" type="image/png" sizes="180x180" href="/assets/static/favicon.7b22250.9bb7ffafafc09ac851d81afb65b8ef59.png"><link rel="preload" href="/assets/css/6.styles.86464a36.css" as="style"><link rel="preload" href="/assets/js/app.99a19a4e.js" as="script"><link rel="preload" href="/assets/js/page--src--templates--post-vue.6ebe960c.js" as="script"><link rel="prefetch" href="/assets/js/page--node-modules--gridsome--app--pages--404-vue.e63af27c.js"><link rel="prefetch" href="/assets/js/page--src--pages--about-vue.4bb37809.js"><link rel="prefetch" href="/assets/js/page--src--pages--index-vue.50021861.js"><link rel="prefetch" href="/assets/js/page--src--templates--tag-vue.b8e2eadf.js"><link rel="stylesheet" href="/assets/css/6.styles.86464a36.css"><noscript data-vue-tag="ssr"><style>.g-image--loading{display:none;}</style></noscript>
+  </head>
+  <body >
+    <script>
+      // Add dark / light detection that runs before Vue.js load. Borrowed from overreacted.io
+      (function() {
+        window.__onThemeChange = function() {};
+        function setTheme(newTheme) {
+          window.__theme = newTheme;
+          preferredTheme = newTheme;
+          document.body.setAttribute('data-theme', newTheme);
+          window.__onThemeChange(newTheme);
+        }
+
+        var preferredTheme;
+        try {
+          preferredTheme = localStorage.getItem('theme');
+        } catch (err) { }
+
+        window.__setPreferredTheme = function(newTheme) {
+          setTheme(newTheme);
+          try {
+            localStorage.setItem('theme', newTheme);
+          } catch (err) {}
+        }
+
+        var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        darkQuery.addListener(function(e) {
+          window.__setPreferredTheme(e.matches ? 'dark' : 'light')
+        });
+
+        setTheme(preferredTheme || (darkQuery.matches ? 'dark' : 'light'));
+      })();
+    </script>
+
+    <div id="app" data-server-rendered="true"><nav role="navigation" aria-label="primary navigation" class="navbar"><div class="container"><div class="navbar-brand"><a href="/" class="navbar-item is-size-4 has-text-weight-bold active">
+  Go2zo
+</a><a role="button" aria-label="menu" aria-expanded="false" class="navbar-burger burger"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div><div class="navbar-menu"><div class="navbar-end"><a href="/about" class="navbar-item">
+            About
+          </a><a href="//github.com/calebanthony/gridsome-bulma" class="navbar-item">
+            GitHub
+          </a></div></div></div></nav><main class="section"><div class="has-text-centered"><h1 class="title is-1">
+      Lint-staged와 Husky를 이용해 자동화 하기
+    </h1><div class="content subtitle is-size-6">
+  Posted 14. November 2020.
+  <strong>3 min read.</strong></div></div><div class="post content section container"><!----><p><h1 id="husky란"><a href="#husky%EB%9E%80" aria-hidden="true"><span class="icon icon-link"></span></a><a href="https://typicode.github.io/husky/#/" target="_blank" rel="nofollow noopener noreferrer">Husky</a>란?</h1>
+<p>Husky는 node 환경에서 git hook 제어를 용이하게 해 주는 툴이다. 기본적으로 git hook은 로컬저장소의 <code>.git/hooks</code> 디렉토리에 위치해 있다. 그리고 이 디렉토리는 git 버전관리의 대상이 아니다. husky는 hook을 공유 가능하도록 해준다.</p>
+<p>husky를 설치하면 모든 git hook은 husky를 실행하도록 설정된다. 실제로 husky를 설치하고 <code>.git/hook</code> 디렉토리를 확인하면 모든 hook 파일들이 활성화(.sample이 붙어있지 않은 파일들) 되어 있는 것을 볼 수 있다. husky에 의해 생성된 파일들은 수동으로 변경하지 않아야 한다(<del>고 알고 있다</del>). 어차피 변경을 해도 변경사항은 공유되지 않을 것이다.</p>
+<p><img src="images/image-20201113161622506.png" alt="image-20201113161622506"></p>
+<h1 id="lint-staged--husky-설치"><a href="#lint-staged--husky-%EC%84%A4%EC%B9%98" aria-hidden="true"><span class="icon icon-link"></span></a>Lint-staged &#x26; Husky 설치</h1>
+<p><a href="https://mrm.js.org/" target="_blank" rel="nofollow noopener noreferrer">mrm</a>은 오픈소스 프로젝트의 환경 설정을 동기화 하기 위한 도구이다. lint-staged도 지원하고 있으며 공식문서에도 아래와 같이 설치하도록 안내하고 있다.</p>
+<pre><code class="language-bash">$ npx mrm lint-staged
+</code></pre>
+<p>어떻게 설치되는지 보려고 package.json에서 lint-staged관련 설정들을 모두 지우고 실행해 봤다. 아래와 같이 <code>pre-commit</code> 시 <code>lint-staged</code>가 실행되도록 설정된 것을 볼 수 있다.</p>
+<pre><code class="language-json">// package.json
+{
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,vue}": "eslint --cache --fix"
+  }
+}
+</code></pre>
+<h1 id="commit-message에-issue-number-자동-삽입"><a href="#commit-message%EC%97%90-issue-number-%EC%9E%90%EB%8F%99-%EC%82%BD%EC%9E%85" aria-hidden="true"><span class="icon icon-link"></span></a>Commit message에 Issue Number 자동 삽입</h1>
+<p>husky를 이용해 npm script만 사용 가능한 것은 아니다.</p>
+<p>쉘 스크립트도 실행 가능하고 복잡한 스크립트는 파일로 따로 작성하여 호출할 수 있다.</p>
+<pre><code class="language-json">// package.json
+{
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged &#x26;&#x26; your-custom-script.sh"
+    }
+  }
+}
+</code></pre>
+<p>이를 이용해 commit message에 issue 번호를 삽입하는 기능을 추가해 보려 한다.</p>
+<p>해당 기능은 commit message를 준비하는 과정으로 <code>prepare-commit-msg</code> 훅에 속한다.</p>
+<pre><code class="language-json">// package.json
+{
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "prepare-commit-msg": "./scripts/add_issue_number_into_commit.sh $HUSKY_GIT_PARAMS"
+    }
+  }
+}
+</code></pre>
+<p>실제 동작하는 스크립트는 아래와 같이 작성되었다. (<a href="https://www.huskyhoochu.com/npm-husky-the-git-hook-manager/" target="_blank" rel="nofollow noopener noreferrer">husky님의 블로그 글</a>을 대부분 참조했다.)</p>
+<pre><code class="language-sh">#!/usr/bin/env bash
+
+COMMIT_MSG_FILE=$1
+
+branch_name=`git rev-parse --abbrev-ref HEAD`
+cut_number=`echo ${branch_name} | cut -d '-' -f1`
+first_line=`head -n1 ${COMMIT_MSG_FILE}`
+
+# if commit_msg_file's first line is empty,
+# add branch name in commit_msg
+if [ -z "$first_line" ]; then
+    sed -i ".bak" "1s/^/[#$cut_number] /" $1
+fi
+</code></pre>
+<p>스크립트 실행 시 <code>HUSKY_GIT_PARAMS</code>로 git 파라미터를 bypass로 전달한다.</p>
+<table>
+<thead>
+<tr>
+<th>Index</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$1</td>
+<td>COMMIT_MSG_FILE</td>
+<td>이 변수가 가리키는 <code>.git/COMMIT_EDITMSG</code> 파일은 커밋 시 출력되는 메시지를 담고 있다.</td>
+</tr>
+<tr>
+<td>$2</td>
+<td>COMMIT_SOURCE</td>
+<td>merge, message, template, commit 등 커밋의 종류를 나타낸다.</td>
+</tr>
+<tr>
+<td>$3</td>
+<td>SHA</td>
+<td>최근 커밋 수정(commit -amend)의 경우에는 커밋 hash 값을 추가로 받는다.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="references"><a href="#references" aria-hidden="true"><span class="icon icon-link"></span></a>References</h1>
+<ul>
+<li><a href="https://www.huskyhoochu.com/npm-husky-the-git-hook-manager/" target="_blank" rel="nofollow noopener noreferrer">https://www.huskyhoochu.com/npm-husky-the-git-hook-manager/</a></li>
+</ul>
+</p><footer><div class="tags"><a href="/tag/lint-staged/" class="tag">
+    #lint-staged
+  </a><a href="/tag/eslint/" class="tag">
+    #eslint
+  </a><a href="/tag/husky/" class="tag">
+    #husky
+  </a></div></footer></div><div class="post-comments"></div></main><footer class="footer has-text-centered"><span>Copyright © 2021. </span><span>Powered by <a href="//gridsome.org"> Gridsome </a></span></footer></div>
+    <script>window.__INITIAL_STATE__={"data":{"post":{"title":"Lint-staged와 Husky를 이용해 자동화 하기","path":"\u002Flint-staged-and-husky\u002F","date":"14. November 2020","timeToRead":3,"tags":[{"id":"lint-staged","title":"lint-staged","path":"\u002Ftag\u002Flint-staged\u002F"},{"id":"eslint","title":"eslint","path":"\u002Ftag\u002Feslint\u002F"},{"id":"husky","title":"husky","path":"\u002Ftag\u002Fhusky\u002F"}],"description":"lint-staged와 husky를 이용해 eslint와 커밋 메시지에 issue 번호 지정을 자동화 한다.","content":"\u003Ch1 id=\"husky란\"\u003E\u003Ca href=\"#husky%EB%9E%80\" aria-hidden=\"true\"\u003E\u003Cspan class=\"icon icon-link\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fa\u003E\u003Ca href=\"https:\u002F\u002Ftypicode.github.io\u002Fhusky\u002F#\u002F\" target=\"_blank\" rel=\"nofollow noopener noreferrer\"\u003EHusky\u003C\u002Fa\u003E란?\u003C\u002Fh1\u003E\n\u003Cp\u003EHusky는 node 환경에서 git hook 제어를 용이하게 해 주는 툴이다. 기본적으로 git hook은 로컬저장소의 \u003Ccode\u003E.git\u002Fhooks\u003C\u002Fcode\u003E 디렉토리에 위치해 있다. 그리고 이 디렉토리는 git 버전관리의 대상이 아니다. husky는 hook을 공유 가능하도록 해준다.\u003C\u002Fp\u003E\n\u003Cp\u003Ehusky를 설치하면 모든 git hook은 husky를 실행하도록 설정된다. 실제로 husky를 설치하고 \u003Ccode\u003E.git\u002Fhook\u003C\u002Fcode\u003E 디렉토리를 확인하면 모든 hook 파일들이 활성화(.sample이 붙어있지 않은 파일들) 되어 있는 것을 볼 수 있다. husky에 의해 생성된 파일들은 수동으로 변경하지 않아야 한다(\u003Cdel\u003E고 알고 있다\u003C\u002Fdel\u003E). 어차피 변경을 해도 변경사항은 공유되지 않을 것이다.\u003C\u002Fp\u003E\n\u003Cp\u003E\u003Cimg src=\"images\u002Fimage-20201113161622506.png\" alt=\"image-20201113161622506\"\u003E\u003C\u002Fp\u003E\n\u003Ch1 id=\"lint-staged--husky-설치\"\u003E\u003Ca href=\"#lint-staged--husky-%EC%84%A4%EC%B9%98\" aria-hidden=\"true\"\u003E\u003Cspan class=\"icon icon-link\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fa\u003ELint-staged &#x26; Husky 설치\u003C\u002Fh1\u003E\n\u003Cp\u003E\u003Ca href=\"https:\u002F\u002Fmrm.js.org\u002F\" target=\"_blank\" rel=\"nofollow noopener noreferrer\"\u003Emrm\u003C\u002Fa\u003E은 오픈소스 프로젝트의 환경 설정을 동기화 하기 위한 도구이다. lint-staged도 지원하고 있으며 공식문서에도 아래와 같이 설치하도록 안내하고 있다.\u003C\u002Fp\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-bash\"\u003E$ npx mrm lint-staged\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\n\u003Cp\u003E어떻게 설치되는지 보려고 package.json에서 lint-staged관련 설정들을 모두 지우고 실행해 봤다. 아래와 같이 \u003Ccode\u003Epre-commit\u003C\u002Fcode\u003E 시 \u003Ccode\u003Elint-staged\u003C\u002Fcode\u003E가 실행되도록 설정된 것을 볼 수 있다.\u003C\u002Fp\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-json\"\u003E\u002F\u002F package.json\n{\n  \"husky\": {\n    \"hooks\": {\n      \"pre-commit\": \"lint-staged\"\n    }\n  },\n  \"lint-staged\": {\n    \"*.{js,vue}\": \"eslint --cache --fix\"\n  }\n}\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\n\u003Ch1 id=\"commit-message에-issue-number-자동-삽입\"\u003E\u003Ca href=\"#commit-message%EC%97%90-issue-number-%EC%9E%90%EB%8F%99-%EC%82%BD%EC%9E%85\" aria-hidden=\"true\"\u003E\u003Cspan class=\"icon icon-link\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fa\u003ECommit message에 Issue Number 자동 삽입\u003C\u002Fh1\u003E\n\u003Cp\u003Ehusky를 이용해 npm script만 사용 가능한 것은 아니다.\u003C\u002Fp\u003E\n\u003Cp\u003E쉘 스크립트도 실행 가능하고 복잡한 스크립트는 파일로 따로 작성하여 호출할 수 있다.\u003C\u002Fp\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-json\"\u003E\u002F\u002F package.json\n{\n  \"husky\": {\n    \"hooks\": {\n      \"pre-commit\": \"lint-staged &#x26;&#x26; your-custom-script.sh\"\n    }\n  }\n}\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\n\u003Cp\u003E이를 이용해 commit message에 issue 번호를 삽입하는 기능을 추가해 보려 한다.\u003C\u002Fp\u003E\n\u003Cp\u003E해당 기능은 commit message를 준비하는 과정으로 \u003Ccode\u003Eprepare-commit-msg\u003C\u002Fcode\u003E 훅에 속한다.\u003C\u002Fp\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-json\"\u003E\u002F\u002F package.json\n{\n  \"husky\": {\n    \"hooks\": {\n      \"pre-commit\": \"lint-staged\",\n      \"prepare-commit-msg\": \".\u002Fscripts\u002Fadd_issue_number_into_commit.sh $HUSKY_GIT_PARAMS\"\n    }\n  }\n}\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\n\u003Cp\u003E실제 동작하는 스크립트는 아래와 같이 작성되었다. (\u003Ca href=\"https:\u002F\u002Fwww.huskyhoochu.com\u002Fnpm-husky-the-git-hook-manager\u002F\" target=\"_blank\" rel=\"nofollow noopener noreferrer\"\u003Ehusky님의 블로그 글\u003C\u002Fa\u003E을 대부분 참조했다.)\u003C\u002Fp\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-sh\"\u003E#!\u002Fusr\u002Fbin\u002Fenv bash\n\nCOMMIT_MSG_FILE=$1\n\nbranch_name=`git rev-parse --abbrev-ref HEAD`\ncut_number=`echo ${branch_name} | cut -d '-' -f1`\nfirst_line=`head -n1 ${COMMIT_MSG_FILE}`\n\n# if commit_msg_file's first line is empty,\n# add branch name in commit_msg\nif [ -z \"$first_line\" ]; then\n    sed -i \".bak\" \"1s\u002F^\u002F[#$cut_number] \u002F\" $1\nfi\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\n\u003Cp\u003E스크립트 실행 시 \u003Ccode\u003EHUSKY_GIT_PARAMS\u003C\u002Fcode\u003E로 git 파라미터를 bypass로 전달한다.\u003C\u002Fp\u003E\n\u003Ctable\u003E\n\u003Cthead\u003E\n\u003Ctr\u003E\n\u003Cth\u003EIndex\u003C\u002Fth\u003E\n\u003Cth\u003EName\u003C\u002Fth\u003E\n\u003Cth\u003EDescription\u003C\u002Fth\u003E\n\u003C\u002Ftr\u003E\n\u003C\u002Fthead\u003E\n\u003Ctbody\u003E\n\u003Ctr\u003E\n\u003Ctd\u003E$1\u003C\u002Ftd\u003E\n\u003Ctd\u003ECOMMIT_MSG_FILE\u003C\u002Ftd\u003E\n\u003Ctd\u003E이 변수가 가리키는 \u003Ccode\u003E.git\u002FCOMMIT_EDITMSG\u003C\u002Fcode\u003E 파일은 커밋 시 출력되는 메시지를 담고 있다.\u003C\u002Ftd\u003E\n\u003C\u002Ftr\u003E\n\u003Ctr\u003E\n\u003Ctd\u003E$2\u003C\u002Ftd\u003E\n\u003Ctd\u003ECOMMIT_SOURCE\u003C\u002Ftd\u003E\n\u003Ctd\u003Emerge, message, template, commit 등 커밋의 종류를 나타낸다.\u003C\u002Ftd\u003E\n\u003C\u002Ftr\u003E\n\u003Ctr\u003E\n\u003Ctd\u003E$3\u003C\u002Ftd\u003E\n\u003Ctd\u003ESHA\u003C\u002Ftd\u003E\n\u003Ctd\u003E최근 커밋 수정(commit -amend)의 경우에는 커밋 hash 값을 추가로 받는다.\u003C\u002Ftd\u003E\n\u003C\u002Ftr\u003E\n\u003C\u002Ftbody\u003E\n\u003C\u002Ftable\u003E\n\u003Ch1 id=\"references\"\u003E\u003Ca href=\"#references\" aria-hidden=\"true\"\u003E\u003Cspan class=\"icon icon-link\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fa\u003EReferences\u003C\u002Fh1\u003E\n\u003Cul\u003E\n\u003Cli\u003E\u003Ca href=\"https:\u002F\u002Fwww.huskyhoochu.com\u002Fnpm-husky-the-git-hook-manager\u002F\" target=\"_blank\" rel=\"nofollow noopener noreferrer\"\u003Ehttps:\u002F\u002Fwww.huskyhoochu.com\u002Fnpm-husky-the-git-hook-manager\u002F\u003C\u002Fa\u003E\u003C\u002Fli\u003E\n\u003C\u002Ful\u003E\n","cover_image":null}},"context":{}};(function(){var s;(s=document.currentScript||document.scripts[document.scripts.length-1]).parentNode.removeChild(s);}());</script><script src="/assets/js/app.99a19a4e.js" defer></script><script src="/assets/js/page--src--templates--post-vue.6ebe960c.js" defer></script>
+  </body>
+</html>

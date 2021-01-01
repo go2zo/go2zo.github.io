@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html data-html-server-rendered="true" lang="en" data-vue-tag="%7B%22lang%22:%7B%22ssr%22:%22en%22%7D%7D">
+  <head>
+    <title>Gridsome에 Eslint와 Prettier 적용기 - Go2zo</title><meta name="gridsome:hash" content="12c81b4eaf125a746d2dbc36b277a349e8c9fed6"><meta data-vue-tag="ssr" charset="utf-8"><meta data-vue-tag="ssr" name="generator" content="Gridsome v0.7.23"><meta data-vue-tag="ssr" data-key="viewport" name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta data-vue-tag="ssr" data-key="format-detection" name="format-detection" content="telephone=no"><meta data-vue-tag="ssr" data-key="description" name="description" content="Simple is the best."><meta data-vue-tag="ssr" name="description" content="lint-staged와 husky를 이용해 eslint와 커밋 메시지에 issue 번호 지정을 자동화 한다."><link data-vue-tag="ssr" rel="icon" href="data:,"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="16x16" href="/assets/static/favicon.ce0531f.9bb7ffafafc09ac851d81afb65b8ef59.png"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="32x32" href="/assets/static/favicon.ac8d93a.9bb7ffafafc09ac851d81afb65b8ef59.png"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="96x96" href="/assets/static/favicon.b9532cc.9bb7ffafafc09ac851d81afb65b8ef59.png"><link data-vue-tag="ssr" rel="apple-touch-icon" type="image/png" sizes="76x76" href="/assets/static/favicon.f22e9f3.9bb7ffafafc09ac851d81afb65b8ef59.png"><link data-vue-tag="ssr" rel="apple-touch-icon" type="image/png" sizes="152x152" href="/assets/static/favicon.62d22cb.9bb7ffafafc09ac851d81afb65b8ef59.png"><link data-vue-tag="ssr" rel="apple-touch-icon" type="image/png" sizes="120x120" href="/assets/static/favicon.1539b60.9bb7ffafafc09ac851d81afb65b8ef59.png"><link data-vue-tag="ssr" rel="apple-touch-icon" type="image/png" sizes="167x167" href="/assets/static/favicon.dc0cdc5.9bb7ffafafc09ac851d81afb65b8ef59.png"><link data-vue-tag="ssr" rel="apple-touch-icon" type="image/png" sizes="180x180" href="/assets/static/favicon.7b22250.9bb7ffafafc09ac851d81afb65b8ef59.png"><link rel="preload" href="/assets/css/6.styles.86464a36.css" as="style"><link rel="preload" href="/assets/js/app.99a19a4e.js" as="script"><link rel="preload" href="/assets/js/page--src--templates--post-vue.6ebe960c.js" as="script"><link rel="prefetch" href="/assets/js/page--node-modules--gridsome--app--pages--404-vue.e63af27c.js"><link rel="prefetch" href="/assets/js/page--src--pages--about-vue.4bb37809.js"><link rel="prefetch" href="/assets/js/page--src--pages--index-vue.50021861.js"><link rel="prefetch" href="/assets/js/page--src--templates--tag-vue.b8e2eadf.js"><link rel="stylesheet" href="/assets/css/6.styles.86464a36.css"><noscript data-vue-tag="ssr"><style>.g-image--loading{display:none;}</style></noscript>
+  </head>
+  <body >
+    <script>
+      // Add dark / light detection that runs before Vue.js load. Borrowed from overreacted.io
+      (function() {
+        window.__onThemeChange = function() {};
+        function setTheme(newTheme) {
+          window.__theme = newTheme;
+          preferredTheme = newTheme;
+          document.body.setAttribute('data-theme', newTheme);
+          window.__onThemeChange(newTheme);
+        }
+
+        var preferredTheme;
+        try {
+          preferredTheme = localStorage.getItem('theme');
+        } catch (err) { }
+
+        window.__setPreferredTheme = function(newTheme) {
+          setTheme(newTheme);
+          try {
+            localStorage.setItem('theme', newTheme);
+          } catch (err) {}
+        }
+
+        var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        darkQuery.addListener(function(e) {
+          window.__setPreferredTheme(e.matches ? 'dark' : 'light')
+        });
+
+        setTheme(preferredTheme || (darkQuery.matches ? 'dark' : 'light'));
+      })();
+    </script>
+
+    <div id="app" data-server-rendered="true"><nav role="navigation" aria-label="primary navigation" class="navbar"><div class="container"><div class="navbar-brand"><a href="/" class="navbar-item is-size-4 has-text-weight-bold active">
+  Go2zo
+</a><a role="button" aria-label="menu" aria-expanded="false" class="navbar-burger burger"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div><div class="navbar-menu"><div class="navbar-end"><a href="/about" class="navbar-item">
+            About
+          </a><a href="//github.com/calebanthony/gridsome-bulma" class="navbar-item">
+            GitHub
+          </a></div></div></div></nav><main class="section"><div class="has-text-centered"><h1 class="title is-1">
+      Gridsome에 Eslint와 Prettier 적용기
+    </h1><div class="content subtitle is-size-6">
+  Posted 30. December 2020.
+  <strong>2 min read.</strong></div></div><div class="post content section container"><!----><p><h1 id="eslint-vs-prettier"><a href="#eslint-vs-prettier" aria-hidden="true"><span class="icon icon-link"></span></a>Eslint vs. Prettier</h1>
+<p>두 도구는 사실 결이 다르다. Eslint는 자바스크립트 문법검사 도구이다. 이에 비해 Prettier는 코드 포매팅을 위한 도구이다. Eslint는 정적분석을 통해 에러유발 코드등을 찾기 때문에 코딩 컨벤션을 검사하는 기능도 갖추고 있긴 하나 코드 포매팅에 특화된 Prettier에 비해 약한편이라고 볼 수 있다. 따라서 보통 eslint와 prettier를 함께 사용한다.</p>
+<h1 id="eslint-"><a href="#eslint-" aria-hidden="true"><span class="icon icon-link"></span></a>eslint-</h1>
+<h1 id="eslint--prettier"><a href="#eslint--prettier" aria-hidden="true"><span class="icon icon-link"></span></a>Eslint + Prettier</h1>
+<p>eslint에 prettier를 함께 적용하기 위해 <code>eslint-plugin-prettier</code> 플러그인을 추가한다.</p>
+<pre><code class="language-bash">$ yarn add -D eslint-plugin-prettier
+</code></pre>
+<p><code>.eslintrc.js</code>에 다음과 같이 추가한다.</p>
+<pre><code class="language-javascript">// .eslintrc.js
+module.exports = {
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": "error"
+  }
+}
+</code></pre>
+<p>보다 권장되는 설정은 <code>eslint-config-prettier</code>를 이용하는 것이다.</p>
+<pre><code class="language-bash">$ yarn add -D eslint-config-prettier
+</code></pre>
+<p><code>eslint-config-prettier</code>는 prettier 룰과 충돌하는 eslint룰을 off해주고 <code>extends</code> 설정을 지원한다.</p>
+<pre><code class="language-diff">// .eslintjs.js
+module.exports = {
++ "extends": ["plugin:prettier/recommended"]
+- "plugins": ["prettier"],
+- "rules": {
+-   "prettier/prettier": "error"
+- }
+}
+</code></pre>
+<p>prettier 설정은 <code>.prettierrc</code> 파일에 작성한다.</p>
+<pre><code class="language-json">// .prettierrc
+{
+  "singleQuote": true,
+  "semi": false
+}
+</code></pre>
+<h1 id="gridsome에-적용하기"><a href="#gridsome%EC%97%90-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0" aria-hidden="true"><span class="icon icon-link"></span></a>Gridsome에 적용하기</h1>
+<p>Gridsome을 위한 eslint의 공식 플러그인(<code>eslint-plugin-gridsome</code>)을 이용한다.</p>
+<p><code>eslint-plugin-gridsome</code>이 <code>vue-eslint-parser</code> ^6.0.4 버전 이상을 사용하므로 함께 설치한다.</p>
+<pre><code class="language-bash">$ yarn add -D eslint-plugin-gridsome vue-eslint-parser
+</code></pre>
+<p><code>.eslintrc.js</code> 파일에 직접 플러그인을 설정해도 되지만 아래와 같이 extends로 간편하게 설정할 수 있다.</p>
+<pre><code class="language-diff">// .eslintrc.js
+module.exports = {
+  parser: "vue-eslint-parser",
++ extends: ["plugin:gridsome/recommended"],
+- plugins: ["gridsome"],
+- rules: {
+-   "gridsome/format-query-block": "error"
+-    ...
+- },
+};
+</code></pre>
+<h1 id="references"><a href="#references" aria-hidden="true"><span class="icon icon-link"></span></a>References</h1>
+<ul>
+<li><a href="https://eslint.gridsome.org/user-guide/" target="_blank" rel="nofollow noopener noreferrer">https://eslint.gridsome.org/user-guide/</a></li>
+<li><a href="https://eslint.vuejs.org/rules/#priority-a-essential-error-prevention-for-vue-js-3-x" target="_blank" rel="nofollow noopener noreferrer">https://eslint.vuejs.org/rules/#priority-a-essential-error-prevention-for-vue-js-3-x</a></li>
+<li><a href="https://garywoodfine.com/gridsome-configure-your-development-environment/" target="_blank" rel="nofollow noopener noreferrer">https://garywoodfine.com/gridsome-configure-your-development-environment/</a></li>
+<li><a href="https://front-end.me/tool/eslint-prettier/" target="_blank" rel="nofollow noopener noreferrer">https://front-end.me/tool/eslint-prettier/</a></li>
+</ul>
+</p><footer><div class="tags"><a href="/tag/gridsome/" class="tag">
+    #gridsome
+  </a><a href="/tag/eslint/" class="tag">
+    #eslint
+  </a><a href="/tag/prettier/" class="tag">
+    #prettier
+  </a></div></footer></div><div class="post-comments"></div></main><footer class="footer has-text-centered"><span>Copyright © 2021. </span><span>Powered by <a href="//gridsome.org"> Gridsome </a></span></footer></div>
+    <script>window.__INITIAL_STATE__={"data":{"post":{"title":"Gridsome에 Eslint와 Prettier 적용기","path":"\u002Fgridsome-with-eslint-and-prettier\u002F","date":"30. December 2020","timeToRead":2,"tags":[{"id":"gridsome","title":"gridsome","path":"\u002Ftag\u002Fgridsome\u002F"},{"id":"eslint","title":"eslint","path":"\u002Ftag\u002Feslint\u002F"},{"id":"prettier","title":"prettier","path":"\u002Ftag\u002Fprettier\u002F"}],"description":"lint-staged와 husky를 이용해 eslint와 커밋 메시지에 issue 번호 지정을 자동화 한다.","content":"\u003Ch1 id=\"eslint-vs-prettier\"\u003E\u003Ca href=\"#eslint-vs-prettier\" aria-hidden=\"true\"\u003E\u003Cspan class=\"icon icon-link\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fa\u003EEslint vs. Prettier\u003C\u002Fh1\u003E\n\u003Cp\u003E두 도구는 사실 결이 다르다. Eslint는 자바스크립트 문법검사 도구이다. 이에 비해 Prettier는 코드 포매팅을 위한 도구이다. Eslint는 정적분석을 통해 에러유발 코드등을 찾기 때문에 코딩 컨벤션을 검사하는 기능도 갖추고 있긴 하나 코드 포매팅에 특화된 Prettier에 비해 약한편이라고 볼 수 있다. 따라서 보통 eslint와 prettier를 함께 사용한다.\u003C\u002Fp\u003E\n\u003Ch1 id=\"eslint-\"\u003E\u003Ca href=\"#eslint-\" aria-hidden=\"true\"\u003E\u003Cspan class=\"icon icon-link\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fa\u003Eeslint-\u003C\u002Fh1\u003E\n\u003Ch1 id=\"eslint--prettier\"\u003E\u003Ca href=\"#eslint--prettier\" aria-hidden=\"true\"\u003E\u003Cspan class=\"icon icon-link\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fa\u003EEslint + Prettier\u003C\u002Fh1\u003E\n\u003Cp\u003Eeslint에 prettier를 함께 적용하기 위해 \u003Ccode\u003Eeslint-plugin-prettier\u003C\u002Fcode\u003E 플러그인을 추가한다.\u003C\u002Fp\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-bash\"\u003E$ yarn add -D eslint-plugin-prettier\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\n\u003Cp\u003E\u003Ccode\u003E.eslintrc.js\u003C\u002Fcode\u003E에 다음과 같이 추가한다.\u003C\u002Fp\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-javascript\"\u003E\u002F\u002F .eslintrc.js\nmodule.exports = {\n  \"plugins\": [\"prettier\"],\n  \"rules\": {\n    \"prettier\u002Fprettier\": \"error\"\n  }\n}\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\n\u003Cp\u003E보다 권장되는 설정은 \u003Ccode\u003Eeslint-config-prettier\u003C\u002Fcode\u003E를 이용하는 것이다.\u003C\u002Fp\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-bash\"\u003E$ yarn add -D eslint-config-prettier\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\n\u003Cp\u003E\u003Ccode\u003Eeslint-config-prettier\u003C\u002Fcode\u003E는 prettier 룰과 충돌하는 eslint룰을 off해주고 \u003Ccode\u003Eextends\u003C\u002Fcode\u003E 설정을 지원한다.\u003C\u002Fp\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-diff\"\u003E\u002F\u002F .eslintjs.js\nmodule.exports = {\n+ \"extends\": [\"plugin:prettier\u002Frecommended\"]\n- \"plugins\": [\"prettier\"],\n- \"rules\": {\n-   \"prettier\u002Fprettier\": \"error\"\n- }\n}\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\n\u003Cp\u003Eprettier 설정은 \u003Ccode\u003E.prettierrc\u003C\u002Fcode\u003E 파일에 작성한다.\u003C\u002Fp\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-json\"\u003E\u002F\u002F .prettierrc\n{\n  \"singleQuote\": true,\n  \"semi\": false\n}\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\n\u003Ch1 id=\"gridsome에-적용하기\"\u003E\u003Ca href=\"#gridsome%EC%97%90-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0\" aria-hidden=\"true\"\u003E\u003Cspan class=\"icon icon-link\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fa\u003EGridsome에 적용하기\u003C\u002Fh1\u003E\n\u003Cp\u003EGridsome을 위한 eslint의 공식 플러그인(\u003Ccode\u003Eeslint-plugin-gridsome\u003C\u002Fcode\u003E)을 이용한다.\u003C\u002Fp\u003E\n\u003Cp\u003E\u003Ccode\u003Eeslint-plugin-gridsome\u003C\u002Fcode\u003E이 \u003Ccode\u003Evue-eslint-parser\u003C\u002Fcode\u003E ^6.0.4 버전 이상을 사용하므로 함께 설치한다.\u003C\u002Fp\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-bash\"\u003E$ yarn add -D eslint-plugin-gridsome vue-eslint-parser\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\n\u003Cp\u003E\u003Ccode\u003E.eslintrc.js\u003C\u002Fcode\u003E 파일에 직접 플러그인을 설정해도 되지만 아래와 같이 extends로 간편하게 설정할 수 있다.\u003C\u002Fp\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-diff\"\u003E\u002F\u002F .eslintrc.js\nmodule.exports = {\n  parser: \"vue-eslint-parser\",\n+ extends: [\"plugin:gridsome\u002Frecommended\"],\n- plugins: [\"gridsome\"],\n- rules: {\n-   \"gridsome\u002Fformat-query-block\": \"error\"\n-    ...\n- },\n};\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\n\u003Ch1 id=\"references\"\u003E\u003Ca href=\"#references\" aria-hidden=\"true\"\u003E\u003Cspan class=\"icon icon-link\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fa\u003EReferences\u003C\u002Fh1\u003E\n\u003Cul\u003E\n\u003Cli\u003E\u003Ca href=\"https:\u002F\u002Feslint.gridsome.org\u002Fuser-guide\u002F\" target=\"_blank\" rel=\"nofollow noopener noreferrer\"\u003Ehttps:\u002F\u002Feslint.gridsome.org\u002Fuser-guide\u002F\u003C\u002Fa\u003E\u003C\u002Fli\u003E\n\u003Cli\u003E\u003Ca href=\"https:\u002F\u002Feslint.vuejs.org\u002Frules\u002F#priority-a-essential-error-prevention-for-vue-js-3-x\" target=\"_blank\" rel=\"nofollow noopener noreferrer\"\u003Ehttps:\u002F\u002Feslint.vuejs.org\u002Frules\u002F#priority-a-essential-error-prevention-for-vue-js-3-x\u003C\u002Fa\u003E\u003C\u002Fli\u003E\n\u003Cli\u003E\u003Ca href=\"https:\u002F\u002Fgarywoodfine.com\u002Fgridsome-configure-your-development-environment\u002F\" target=\"_blank\" rel=\"nofollow noopener noreferrer\"\u003Ehttps:\u002F\u002Fgarywoodfine.com\u002Fgridsome-configure-your-development-environment\u002F\u003C\u002Fa\u003E\u003C\u002Fli\u003E\n\u003Cli\u003E\u003Ca href=\"https:\u002F\u002Ffront-end.me\u002Ftool\u002Feslint-prettier\u002F\" target=\"_blank\" rel=\"nofollow noopener noreferrer\"\u003Ehttps:\u002F\u002Ffront-end.me\u002Ftool\u002Feslint-prettier\u002F\u003C\u002Fa\u003E\u003C\u002Fli\u003E\n\u003C\u002Ful\u003E\n","cover_image":null}},"context":{}};(function(){var s;(s=document.currentScript||document.scripts[document.scripts.length-1]).parentNode.removeChild(s);}());</script><script src="/assets/js/app.99a19a4e.js" defer></script><script src="/assets/js/page--src--templates--post-vue.6ebe960c.js" defer></script>
+  </body>
+</html>

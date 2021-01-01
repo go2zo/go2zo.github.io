@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html data-html-server-rendered="true" lang="en" data-vue-tag="%7B%22lang%22:%7B%22ssr%22:%22en%22%7D%7D">
+  <head>
+    <title>Gridsome으로 Blog 만들기 (2) - 포스트 작성 - Go2zo</title><meta name="gridsome:hash" content="12c81b4eaf125a746d2dbc36b277a349e8c9fed6"><meta data-vue-tag="ssr" charset="utf-8"><meta data-vue-tag="ssr" name="generator" content="Gridsome v0.7.23"><meta data-vue-tag="ssr" data-key="viewport" name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta data-vue-tag="ssr" data-key="format-detection" name="format-detection" content="telephone=no"><meta data-vue-tag="ssr" data-key="description" name="description" content="Simple is the best."><meta data-vue-tag="ssr" name="description" content="Gridsome 프로젝트에 첫 포스트를 생성하고 문제점을 해결한다."><link data-vue-tag="ssr" rel="icon" href="data:,"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="16x16" href="/assets/static/favicon.ce0531f.9bb7ffafafc09ac851d81afb65b8ef59.png"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="32x32" href="/assets/static/favicon.ac8d93a.9bb7ffafafc09ac851d81afb65b8ef59.png"><link data-vue-tag="ssr" rel="icon" type="image/png" sizes="96x96" href="/assets/static/favicon.b9532cc.9bb7ffafafc09ac851d81afb65b8ef59.png"><link data-vue-tag="ssr" rel="apple-touch-icon" type="image/png" sizes="76x76" href="/assets/static/favicon.f22e9f3.9bb7ffafafc09ac851d81afb65b8ef59.png"><link data-vue-tag="ssr" rel="apple-touch-icon" type="image/png" sizes="152x152" href="/assets/static/favicon.62d22cb.9bb7ffafafc09ac851d81afb65b8ef59.png"><link data-vue-tag="ssr" rel="apple-touch-icon" type="image/png" sizes="120x120" href="/assets/static/favicon.1539b60.9bb7ffafafc09ac851d81afb65b8ef59.png"><link data-vue-tag="ssr" rel="apple-touch-icon" type="image/png" sizes="167x167" href="/assets/static/favicon.dc0cdc5.9bb7ffafafc09ac851d81afb65b8ef59.png"><link data-vue-tag="ssr" rel="apple-touch-icon" type="image/png" sizes="180x180" href="/assets/static/favicon.7b22250.9bb7ffafafc09ac851d81afb65b8ef59.png"><link rel="preload" href="/assets/css/6.styles.86464a36.css" as="style"><link rel="preload" href="/assets/js/app.99a19a4e.js" as="script"><link rel="preload" href="/assets/js/page--src--templates--post-vue.6ebe960c.js" as="script"><link rel="prefetch" href="/assets/js/page--node-modules--gridsome--app--pages--404-vue.e63af27c.js"><link rel="prefetch" href="/assets/js/page--src--pages--about-vue.4bb37809.js"><link rel="prefetch" href="/assets/js/page--src--pages--index-vue.50021861.js"><link rel="prefetch" href="/assets/js/page--src--templates--tag-vue.b8e2eadf.js"><link rel="stylesheet" href="/assets/css/6.styles.86464a36.css"><noscript data-vue-tag="ssr"><style>.g-image--loading{display:none;}</style></noscript>
+  </head>
+  <body >
+    <script>
+      // Add dark / light detection that runs before Vue.js load. Borrowed from overreacted.io
+      (function() {
+        window.__onThemeChange = function() {};
+        function setTheme(newTheme) {
+          window.__theme = newTheme;
+          preferredTheme = newTheme;
+          document.body.setAttribute('data-theme', newTheme);
+          window.__onThemeChange(newTheme);
+        }
+
+        var preferredTheme;
+        try {
+          preferredTheme = localStorage.getItem('theme');
+        } catch (err) { }
+
+        window.__setPreferredTheme = function(newTheme) {
+          setTheme(newTheme);
+          try {
+            localStorage.setItem('theme', newTheme);
+          } catch (err) {}
+        }
+
+        var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        darkQuery.addListener(function(e) {
+          window.__setPreferredTheme(e.matches ? 'dark' : 'light')
+        });
+
+        setTheme(preferredTheme || (darkQuery.matches ? 'dark' : 'light'));
+      })();
+    </script>
+
+    <div id="app" data-server-rendered="true"><nav role="navigation" aria-label="primary navigation" class="navbar"><div class="container"><div class="navbar-brand"><a href="/" class="navbar-item is-size-4 has-text-weight-bold active">
+  Go2zo
+</a><a role="button" aria-label="menu" aria-expanded="false" class="navbar-burger burger"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div><div class="navbar-menu"><div class="navbar-end"><a href="/about" class="navbar-item">
+            About
+          </a><a href="//github.com/calebanthony/gridsome-bulma" class="navbar-item">
+            GitHub
+          </a></div></div></div></nav><main class="section"><div class="has-text-centered"><h1 class="title is-1">
+      Gridsome으로 Blog 만들기 (2) - 포스트 작성
+    </h1><div class="content subtitle is-size-6">
+  Posted 11. November 2020.
+  <strong>3 min read.</strong></div></div><div class="post content section container"><!----><p><h1 id="첫-포스트-작성"><a href="#%EC%B2%AB-%ED%8F%AC%EC%8A%A4%ED%8A%B8-%EC%9E%91%EC%84%B1" aria-hidden="true"><span class="icon icon-link"></span></a>첫 포스트 작성</h1>
+<p>마크다운 파일들이 각각의 웹페이지로 변경될 때 경로는 glob 패턴으로 작성되며 이에 대한 설정은 <code>gridsome.config.js</code>에 있다.</p>
+<p>기본적으로 <code>title</code>을 사용하도록 설정되어 있는데  <a href="https://en.wiktionary.org/wiki/kebab_case" target="_blank" rel="nofollow noopener noreferrer">kebab case</a>로 변환하여 사용한다. <code>title: Say hello to Gridsome 🎉</code>이라면 생성되는 경로는 <code>/say-hello-to-gridsome</code>이 된다.</p>
+<pre><code class="language-js">// gridsome.config.js
+{
+  templates: {
+    Post: '/:title',
+    Tag: '/tag/:id',
+  },
+}
+</code></pre>
+<p>여기서 한가지 문제가 있는데 한글이나 특수문자가 지원되지 않는 것이다.</p>
+<pre><code class="language-yaml">title: Gridsome으로 Blog 만들기 (1) - 환경 설정
+</code></pre>
+<p>위와 같이 작성하는 경우 생성된 경로는 <code>gridsome-blog-1</code>로 의도하지 않은 결과이다. 이를 해결하기 위해서 front-matter을 <code>path</code> 항목을 새로 만들고 gridsome 설정을 변경하였다.</p>
+<pre><code class="language-yaml">title: Gridsome으로 Blog 만들기 (1) - 환경 설정
+path: make-blog-with-gridsome-1
+</code></pre>
+<pre><code class="language-js">// gridsome.config.js
+{
+  templates: {
+    Post: '/blog/:path',
+    Tag: '/tag/:id',
+  },
+}
+</code></pre>
+<p>번거롭긴 하지만 한글 제목을 위해서 아직까진 어쩔 수 없는 선택같다.</p>
+<h1 id="github-pages-설정"><a href="#github-pages-%EC%84%A4%EC%A0%95" aria-hidden="true"><span class="icon icon-link"></span></a>GitHub Pages 설정</h1>
+<p>GitHub Pages는 개인 혹은 프로젝트 별로 GitHub에서 제공하는 웹사이트이다. (이미 많이 알고 있을 것이므로 자세한 설명은 생략)</p>
+<p>이미 과거에 저장소는 생성되어 있었고 Jekyll 프로젝트가 배포되어 있는 상태였다. 최신 흐름에 맞춰 <code>master</code> 브랜치를 과감히 날려버리고 새로운 소스를 <code>main</code> 브랜치로 푸시하였다. <code>{account}.github.io</code> 저장소는 기본적으로 master(혹은 main) 브랜치를 이용해 호스팅을 한다. 하지만 원본 소스도 저장하기 위해 호스트 브랜치를 <code>gh-pages</code>로 변경했다. <code>Settings > Options > GitHub Pages</code>에서 변경이 가능하다.</p>
+<p><img src="images/image-20201112142857796.png" alt="image-20201112142857796"></p>
+<h1 id="github-pages에-배포"><a href="#github-pages%EC%97%90-%EB%B0%B0%ED%8F%AC" aria-hidden="true"><span class="icon icon-link"></span></a>GitHub Pages에 배포</h1>
+<p>기본적인 배포 과정은 다음과 같다.</p>
+<blockquote>
+<ol>
+<li><code>gridsome build</code>로 static site 생성</li>
+<li>저장소에 push (<code>gh-pages</code> 패키지 이용)</li>
+</ol>
+</blockquote>
+<p>이미 스타터를 통해 모두 추가되어 있긴 하지만 잠시 설명을 하자면 퍼블리싱을 위한 <code>gh-pages</code> 패키지를 설치한다.</p>
+<pre><code class="language-bash">$ yarn add -D gh-pages
+</code></pre>
+<p>아래 두 스크립트가 빌드와 배포를 실행하게 된다. 배포전에는 빌드가 되어야 하므로 배포 스크립트에 빌드를 추가하였다. 스크립트가 없다면 <code>package.json</code>에 추가하면 된다.</p>
+<pre><code class="language-json">// package.json
+{
+  "scripts": {
+    "build": "gridsome build",
+    "deploy": "gridsome build &#x26;&#x26; gh-pages -d dist",
+  },
+}
+</code></pre>
+<p>배포를 실행해보자.</p>
+<pre><code class="language-bash">$ yarn deploy
+</code></pre>
+<p>정상적으로 배포가 완료되면 웹사이트에 접속하여 확인할 수 있다. (실시간으로 배포되지는 않지만 그리 오래 걸리지도 않는다.)</p>
+<p><img src="images/image-20201112190623964.png" alt="image-20201112190623964"></p>
+</p><footer><div class="tags"><a href="/tag/blog/" class="tag">
+    #blog
+  </a><a href="/tag/gridsome/" class="tag">
+    #gridsome
+  </a><a href="/tag/gh-pages/" class="tag">
+    #gh-pages
+  </a></div></footer></div><div class="post-comments"></div></main><footer class="footer has-text-centered"><span>Copyright © 2021. </span><span>Powered by <a href="//gridsome.org"> Gridsome </a></span></footer></div>
+    <script>window.__INITIAL_STATE__={"data":{"post":{"title":"Gridsome으로 Blog 만들기 (2) - 포스트 작성","path":"\u002Fmake-blog-with-gridsome-2\u002F","date":"11. November 2020","timeToRead":3,"tags":[{"id":"blog","title":"blog","path":"\u002Ftag\u002Fblog\u002F"},{"id":"gridsome","title":"gridsome","path":"\u002Ftag\u002Fgridsome\u002F"},{"id":"gh-pages","title":"gh-pages","path":"\u002Ftag\u002Fgh-pages\u002F"}],"description":"Gridsome 프로젝트에 첫 포스트를 생성하고 문제점을 해결한다.","content":"\u003Ch1 id=\"첫-포스트-작성\"\u003E\u003Ca href=\"#%EC%B2%AB-%ED%8F%AC%EC%8A%A4%ED%8A%B8-%EC%9E%91%EC%84%B1\" aria-hidden=\"true\"\u003E\u003Cspan class=\"icon icon-link\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fa\u003E첫 포스트 작성\u003C\u002Fh1\u003E\n\u003Cp\u003E마크다운 파일들이 각각의 웹페이지로 변경될 때 경로는 glob 패턴으로 작성되며 이에 대한 설정은 \u003Ccode\u003Egridsome.config.js\u003C\u002Fcode\u003E에 있다.\u003C\u002Fp\u003E\n\u003Cp\u003E기본적으로 \u003Ccode\u003Etitle\u003C\u002Fcode\u003E을 사용하도록 설정되어 있는데  \u003Ca href=\"https:\u002F\u002Fen.wiktionary.org\u002Fwiki\u002Fkebab_case\" target=\"_blank\" rel=\"nofollow noopener noreferrer\"\u003Ekebab case\u003C\u002Fa\u003E로 변환하여 사용한다. \u003Ccode\u003Etitle: Say hello to Gridsome 🎉\u003C\u002Fcode\u003E이라면 생성되는 경로는 \u003Ccode\u003E\u002Fsay-hello-to-gridsome\u003C\u002Fcode\u003E이 된다.\u003C\u002Fp\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-js\"\u003E\u002F\u002F gridsome.config.js\n{\n  templates: {\n    Post: '\u002F:title',\n    Tag: '\u002Ftag\u002F:id',\n  },\n}\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\n\u003Cp\u003E여기서 한가지 문제가 있는데 한글이나 특수문자가 지원되지 않는 것이다.\u003C\u002Fp\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-yaml\"\u003Etitle: Gridsome으로 Blog 만들기 (1) - 환경 설정\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\n\u003Cp\u003E위와 같이 작성하는 경우 생성된 경로는 \u003Ccode\u003Egridsome-blog-1\u003C\u002Fcode\u003E로 의도하지 않은 결과이다. 이를 해결하기 위해서 front-matter을 \u003Ccode\u003Epath\u003C\u002Fcode\u003E 항목을 새로 만들고 gridsome 설정을 변경하였다.\u003C\u002Fp\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-yaml\"\u003Etitle: Gridsome으로 Blog 만들기 (1) - 환경 설정\npath: make-blog-with-gridsome-1\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-js\"\u003E\u002F\u002F gridsome.config.js\n{\n  templates: {\n    Post: '\u002Fblog\u002F:path',\n    Tag: '\u002Ftag\u002F:id',\n  },\n}\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\n\u003Cp\u003E번거롭긴 하지만 한글 제목을 위해서 아직까진 어쩔 수 없는 선택같다.\u003C\u002Fp\u003E\n\u003Ch1 id=\"github-pages-설정\"\u003E\u003Ca href=\"#github-pages-%EC%84%A4%EC%A0%95\" aria-hidden=\"true\"\u003E\u003Cspan class=\"icon icon-link\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fa\u003EGitHub Pages 설정\u003C\u002Fh1\u003E\n\u003Cp\u003EGitHub Pages는 개인 혹은 프로젝트 별로 GitHub에서 제공하는 웹사이트이다. (이미 많이 알고 있을 것이므로 자세한 설명은 생략)\u003C\u002Fp\u003E\n\u003Cp\u003E이미 과거에 저장소는 생성되어 있었고 Jekyll 프로젝트가 배포되어 있는 상태였다. 최신 흐름에 맞춰 \u003Ccode\u003Emaster\u003C\u002Fcode\u003E 브랜치를 과감히 날려버리고 새로운 소스를 \u003Ccode\u003Emain\u003C\u002Fcode\u003E 브랜치로 푸시하였다. \u003Ccode\u003E{account}.github.io\u003C\u002Fcode\u003E 저장소는 기본적으로 master(혹은 main) 브랜치를 이용해 호스팅을 한다. 하지만 원본 소스도 저장하기 위해 호스트 브랜치를 \u003Ccode\u003Egh-pages\u003C\u002Fcode\u003E로 변경했다. \u003Ccode\u003ESettings \u003E Options \u003E GitHub Pages\u003C\u002Fcode\u003E에서 변경이 가능하다.\u003C\u002Fp\u003E\n\u003Cp\u003E\u003Cimg src=\"images\u002Fimage-20201112142857796.png\" alt=\"image-20201112142857796\"\u003E\u003C\u002Fp\u003E\n\u003Ch1 id=\"github-pages에-배포\"\u003E\u003Ca href=\"#github-pages%EC%97%90-%EB%B0%B0%ED%8F%AC\" aria-hidden=\"true\"\u003E\u003Cspan class=\"icon icon-link\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fa\u003EGitHub Pages에 배포\u003C\u002Fh1\u003E\n\u003Cp\u003E기본적인 배포 과정은 다음과 같다.\u003C\u002Fp\u003E\n\u003Cblockquote\u003E\n\u003Col\u003E\n\u003Cli\u003E\u003Ccode\u003Egridsome build\u003C\u002Fcode\u003E로 static site 생성\u003C\u002Fli\u003E\n\u003Cli\u003E저장소에 push (\u003Ccode\u003Egh-pages\u003C\u002Fcode\u003E 패키지 이용)\u003C\u002Fli\u003E\n\u003C\u002Fol\u003E\n\u003C\u002Fblockquote\u003E\n\u003Cp\u003E이미 스타터를 통해 모두 추가되어 있긴 하지만 잠시 설명을 하자면 퍼블리싱을 위한 \u003Ccode\u003Egh-pages\u003C\u002Fcode\u003E 패키지를 설치한다.\u003C\u002Fp\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-bash\"\u003E$ yarn add -D gh-pages\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\n\u003Cp\u003E아래 두 스크립트가 빌드와 배포를 실행하게 된다. 배포전에는 빌드가 되어야 하므로 배포 스크립트에 빌드를 추가하였다. 스크립트가 없다면 \u003Ccode\u003Epackage.json\u003C\u002Fcode\u003E에 추가하면 된다.\u003C\u002Fp\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-json\"\u003E\u002F\u002F package.json\n{\n  \"scripts\": {\n    \"build\": \"gridsome build\",\n    \"deploy\": \"gridsome build &#x26;&#x26; gh-pages -d dist\",\n  },\n}\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\n\u003Cp\u003E배포를 실행해보자.\u003C\u002Fp\u003E\n\u003Cpre\u003E\u003Ccode class=\"language-bash\"\u003E$ yarn deploy\n\u003C\u002Fcode\u003E\u003C\u002Fpre\u003E\n\u003Cp\u003E정상적으로 배포가 완료되면 웹사이트에 접속하여 확인할 수 있다. (실시간으로 배포되지는 않지만 그리 오래 걸리지도 않는다.)\u003C\u002Fp\u003E\n\u003Cp\u003E\u003Cimg src=\"images\u002Fimage-20201112190623964.png\" alt=\"image-20201112190623964\"\u003E\u003C\u002Fp\u003E\n","cover_image":null}},"context":{}};(function(){var s;(s=document.currentScript||document.scripts[document.scripts.length-1]).parentNode.removeChild(s);}());</script><script src="/assets/js/app.99a19a4e.js" defer></script><script src="/assets/js/page--src--templates--post-vue.6ebe960c.js" defer></script>
+  </body>
+</html>
