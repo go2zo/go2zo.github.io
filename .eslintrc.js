@@ -1,25 +1,26 @@
-const path = require('path');
-
 module.exports = {
   root: true,
+  parser: 'vue-eslint-parser',
   env: {
-    browser: true,
     node: true,
   },
+  plugins: [
+    'prettier',
+    'import',
+  ],
   extends: [
     'airbnb-base',
-    'plugin:vue/vue3-recommended',
     'plugin:gridsome/recommended',
+    'plugin:vue/vue3-essential',
+    'plugin:prettier/recommended',
+    '@vue/prettier',
   ],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'vue/html-indent': ['error', 2],
     'vue/no-v-html': 'off',
-    'import/extensions': ['error', 'always'],
-  },
-  parserOptions: {
-    parser: 'babel-eslint',
+    // 'import/extensions': ['error', 'always'],
   },
   settings: {
     'import/resolver': {
@@ -31,7 +32,15 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    'gridsome',
+  overrides: [
+    {
+      files: [
+        '**/__tests__/*.{j,t}s?(x)',
+        '**/tests/unit/**/*.spec.{j,t}s?(x)',
+      ],
+      env: {
+        jest: true,
+      },
+    },
   ],
 };
