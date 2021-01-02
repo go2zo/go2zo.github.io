@@ -49,8 +49,8 @@ query {
 </static-query>
 
 <script>
-import Author from '~/components/Author.vue';
-import PostCard from '~/components/PostCard.vue';
+import Author from '~/components/Author.vue'
+import PostCard from '~/components/PostCard.vue'
 
 export default {
   components: {
@@ -68,16 +68,19 @@ export default {
         },
         { property: 'og:type', content: 'website' },
         { property: 'og:title', content: this.$static.metadata.siteName },
-        { property: 'og:description', content: this.$static.metadata.siteDescription },
+        {
+          property: 'og:description',
+          content: this.$static.metadata.siteDescription,
+        },
         { property: 'og:url', content: this.$static.metadata.siteUrl },
         { property: 'og:image', content: this.ogImageUrl },
       ],
-    };
+    }
   },
   computed: {
     ogImageUrl() {
-      return `${this.$static.metadata.siteUrl}${this.$static.metadata.pathPrefix}/images/author.jpg`;
+      return `${this.$static.metadata.siteUrl}${this.$static.metadata.pathPrefix}/images/author.jpg`
     },
   },
-};
+}
 </script>

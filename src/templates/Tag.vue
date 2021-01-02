@@ -1,8 +1,6 @@
 <template>
   <Layout>
-    <h1 class="title is-size-1 has-text-centered">
-      # {{ $page.tag.title }}
-    </h1>
+    <h1 class="title is-size-1 has-text-centered"># {{ $page.tag.title }}</h1>
 
     <div class="posts">
       <PostCard
@@ -37,7 +35,7 @@ query Tag($id: ID!) {
 </page-query>
 
 <script>
-import PostCard from '~/components/PostCard.vue';
+import PostCard from '~/components/PostCard.vue'
 
 export default {
   components: {
@@ -46,5 +44,5 @@ export default {
   metaInfo: {
     title: 'Hello, world!',
   },
-};
+}
 </script>

@@ -1,1 +1,4 @@
-src/main.js
+node_modules
+dist
+gridsome.config.js
+gridsome.server.js

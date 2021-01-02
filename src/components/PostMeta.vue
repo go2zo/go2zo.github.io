@@ -13,9 +13,9 @@ export default {
     post: {
       type: Object,
       default() {
-        return {};
+        return {}
       },
     },
   },
-};
+}
 </script>

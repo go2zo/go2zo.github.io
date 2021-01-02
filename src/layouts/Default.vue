@@ -1,10 +1,6 @@
 <template>
   <div id="app">
-    <nav
-      class="navbar"
-      role="navigation"
-      aria-label="primary navigation"
-    >
+    <nav class="navbar" role="navigation" aria-label="primary navigation">
       <div class="container">
         <div class="navbar-brand">
           <Logo v-if="showLogo" />
@@ -22,17 +18,9 @@
           </a>
         </div>
 
-        <div
-          class="navbar-menu"
-          :class="{ 'is-active': showNav } "
-        >
+        <div class="navbar-menu" :class="{ 'is-active': showNav }">
           <div class="navbar-end">
-            <g-link
-              class="navbar-item"
-              to="/about"
-            >
-              About
-            </g-link>
+            <g-link class="navbar-item" to="/about"> About </g-link>
             <a
               class="navbar-item"
               href="//github.com/calebanthony/gridsome-bulma"
@@ -56,7 +44,7 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue';
+import Logo from '~/components/Logo.vue'
 
 export default {
   components: {
@@ -71,5 +59,5 @@ export default {
   data: () => ({
     showNav: false,
   }),
-};
+}
 </script>

@@ -5,7 +5,7 @@
     "build": "gridsome build",
     "develop": "gridsome develop",
     "explore": "gridsome explore",
-    "lint": "eslint --fix",
+    "lint": "eslint --ext .js,.vue src/ --fix",
     "deploy": "gridsome build && gh-pages -d dist"
   },
   "dependencies": {
@@ -43,7 +43,7 @@
   },
   "lint-staged": {
     "src/**/*.{js,vue}": [
-      "yarn lint",
+      "eslint --fix",
       "git add"
     ]
   }

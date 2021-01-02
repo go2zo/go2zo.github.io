@@ -4,21 +4,12 @@
       <h1 class="title is-1">
         {{ $page.post.title }}
       </h1>
-      <PostMeta
-        class="subtitle is-size-6"
-        :post="$page.post"
-      />
+      <PostMeta class="subtitle is-size-6" :post="$page.post" />
     </div>
 
     <div class="post content section container">
-      <figure
-        v-if="$page.post.cover_image"
-        class="image is-16by9"
-      >
-        <g-image
-          alt="Cover image"
-          :src="$page.post.cover_image"
-        />
+      <figure v-if="$page.post.cover_image" class="image is-16by9">
+        <g-image alt="Cover image" :src="$page.post.cover_image" />
       </figure>
 
       <p v-html="$page.post.content" />
@@ -35,8 +26,8 @@
 </template>
 
 <script>
-import PostMeta from '~/components/PostMeta.vue';
-import PostTags from '~/components/PostTags.vue';
+import PostMeta from '~/components/PostMeta.vue'
+import PostTags from '~/components/PostTags.vue'
 
 export default {
   components: {
@@ -52,9 +43,9 @@ export default {
           content: this.$page.post.description,
         },
       ],
-    };
+    }
   },
-};
+}
 </script>
 
 <page-query>
