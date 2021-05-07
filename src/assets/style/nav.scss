@@ -1,0 +1,67 @@
+nav a {
+  @apply tracking-wide font-normal flex items-center justify-center flex-wrap md:px-2 px-0.5 py-4 no-underline relative text-base;
+
+  &:after {
+    content: "";
+    @apply absolute h-px left-1/2 w-0 transform -translate-x-1/2 bg-transparent opacity-50 transition-all duration-600;
+  }
+
+  svg {
+    @apply w-5 h-5 mx-1.5 my-0.5;
+  }
+
+  &:not(.active):not(:hover):not(.button) {
+    @apply text-current opacity-85;
+  }
+
+  &:hover {
+    @apply text-primary;
+
+    &:after {
+      @apply bg-primary;
+    }
+  }
+
+  &:active {
+    @apply text-primary-dark;
+
+    &:after {
+      @apply bg-primary-dark w-full;
+    }
+  }
+
+}
+
+nav {
+  .has-dropdown {
+    @apply relative inline-block;
+
+    &:hover {
+      .dropdown {
+        @apply visible opacity-100 transform translate-y-0;
+        pointer-events: inherit;
+      }
+    }
+  }
+
+  .dropdown {
+    @apply bg-white pointer-events-none hidden z-10 absolute top-full right-0 w-50 transform -translate-y-1.5 opacity-0;
+    color: #111;
+    box-shadow: 1px 1px 5px rgba(0,0,0,.3);
+    transition: opacity .3s, transform .3s cubic-bezier(0.19, 1, 0.22, 1);
+    border-radius: 3px;
+
+    @__title {
+      @apply text-xs uppercase tracking-wider font-bold opacity-30 block mt-2.5;
+      padding: 5px;
+    }
+
+    a {
+      @apply justify-start text-sm px-4 py-2;
+
+      &:hover {
+        @apply bg-tertiary;
+      }
+    }
+  }
+}

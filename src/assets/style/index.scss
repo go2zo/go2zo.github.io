@@ -1,8 +1,11 @@
-/** Import the Bulma variables */
-@import "variables";
+@import 'tailwindcss/screens';
 
-/** Import Bulma */
-@import "~bulma";
-
-/** Import overrides */
-@import "overrides";
+@import 'vars';
+@import 'base';
+@import 'nav';
+@import 'form';
+@import 'layouts';
+@import 'links';
+@import 'typography';
+@import 'code';
+@import 'docs';

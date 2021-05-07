@@ -1,63 +1,56 @@
 <template>
-  <div id="app">
-    <nav class="navbar" role="navigation" aria-label="primary navigation">
-      <div class="container">
-        <div class="navbar-brand">
-          <Logo v-if="showLogo" />
-          <a
-            role="button"
-            class="navbar-burger burger"
-            :class="{ 'is-active': showNav }"
-            aria-label="menu"
-            aria-expanded="false"
-            @click="showNav = !showNav"
-          >
-            <span aria-hidden="true" />
-            <span aria-hidden="true" />
-            <span aria-hidden="true" />
-          </a>
-        </div>
-
-        <div class="navbar-menu" :class="{ 'is-active': showNav }">
-          <div class="navbar-end">
-            <g-link class="navbar-item" to="/about"> About </g-link>
-            <a
-              class="navbar-item"
-              href="//github.com/calebanthony/gridsome-bulma"
-            >
-              GitHub
-            </a>
-          </div>
-        </div>
-      </div>
-    </nav>
-
-    <main class="section">
-      <slot />
-    </main>
-
-    <footer class="footer has-text-centered">
-      <span>Copyright © {{ new Date().getFullYear() }}. </span>
-      <span>Powered by <a href="//gridsome.org"> Gridsome </a></span>
-    </footer>
+  <div id="app" dark>
+    <Header />
+    <slot />
+    <Footer />
   </div>
 </template>
 
+<static-query>
+query {
+  metadata {
+    siteName
+  }
+}
+</static-query>
+
 <script>
-import Logo from '~/components/Logo.vue'
+import Header from './partials/Header'
+import Footer from './partials/Footer'
 
 export default {
   components: {
-    Logo,
+    Header,
+    Footer,
   },
-  props: {
-    showLogo: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  data: () => ({
-    showNav: false,
-  }),
 }
 </script>
+
+<style>
+body {
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.layout {
+  max-width: 760px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  height: 80px;
+}
+
+.nav__link {
+  margin-left: 20px;
+}
+</style>

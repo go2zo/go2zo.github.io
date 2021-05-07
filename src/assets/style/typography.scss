@@ -1,0 +1,6 @@
+p {
+  @apply tracking-little-tight;
+  &:last-child {
+    @apply mb-0;
+  }
+}

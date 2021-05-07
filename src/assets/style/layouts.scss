@@ -1,0 +1,34 @@
+.container {
+  @apply relative;
+
+  &,
+  &-md,
+  &-full,
+  &-base,
+  &-sm,
+  &-mini {
+    @apply py-0 px-x1 mx-auto w-full;
+  }
+  &-md { max-width: 760px }
+  &-base { max-width: 680px }
+  &-sm { max-width: 630px }
+  &-mini { max-width: 460px }
+
+  &-main {
+    @apply flex-col flex-nowrap tablet:flex-row;
+  }
+
+  &--push {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+
+  &--framed {
+    @apply p-x2 bg-white shadow;
+    box-shadow: 1px 1px 15px rgba(0,0,0,.1);
+  }
+
+  .container {
+    @apply px-0 tablet:px-x1;
+  }
+}

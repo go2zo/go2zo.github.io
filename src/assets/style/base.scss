@@ -1,0 +1,27 @@
+html, body {
+  @apply bg w-full transition duration-300 box-border;
+}
+
+#app {
+  @apply text-body;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body *:target {
+  @apply animate-target;
+}
+
+img, svg {
+  @apply align-middle max-w-full;
+}
+
+hr {
+  @apply bg-line #{!important};
+}
+
+::selection {
+  @apply bg-select;
+}

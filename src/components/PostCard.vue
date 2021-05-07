@@ -1,39 +1,34 @@
 <template>
-  <div class="card">
-    <g-link v-if="post.cover_image" class="card-image" :to="post.path">
-      <figure class="image is-16by9">
-        <g-image alt="Cover image" :src="post.cover_image" />
-      </figure>
-    </g-link>
-    <div class="card-content">
-      <g-link :to="post.path" class="is-size-4 has-text-weight-bold">
-        {{ post.title }}
-      </g-link>
-      <p class="content" v-html="post.description" />
-      <PostMeta :post="post" />
-    </div>
-    <div v-if="post.tags" class="card-footer">
-      <PostTags class="card-footer-item" :post="post" />
-    </div>
-  </div>
+  <Card class="blog-posts__post" :link="post.path">
+    <h3 v-html="post.title" />
+    <p v-html="post.excerpt" />
+    <PostMeta :post="post" />
+  </Card>
 </template>
 
 <script>
-import PostMeta from '~/components/PostMeta.vue'
-import PostTags from '~/components/PostTags.vue'
+import Card from '@/components/Card'
+import PostMeta from '@/components/PostMeta'
 
 export default {
   components: {
+    Card,
     PostMeta,
-    PostTags,
   },
   props: {
-    post: {
-      type: Object,
-      default() {
-        return {}
-      },
-    },
+    post: { type: Object, required: true },
   },
 }
 </script>
+
+<style lang="scss">
+.blog-posts {
+  &__post {
+    @apply relative mb-8;
+
+    .card__inner {
+      @apply p-x2;
+    }
+  }
+}
+</style>
