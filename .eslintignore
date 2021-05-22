@@ -2,3 +2,6 @@ node_modules
 dist
 gridsome.config.js
 gridsome.server.js
+tailwind.config.js
+
+!.eslintrc.js

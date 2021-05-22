@@ -4,28 +4,33 @@ module.exports = {
   root: true,
   parser: 'vue-eslint-parser',
   env: {
+    browser: true,
     node: true,
+    es2021: true,
   },
-  plugins: ['prettier', 'import'],
+  plugins: ['import'],
   extends: [
     'airbnb-base',
     'plugin:gridsome/recommended',
-    'plugin:vue/vue3-essential',
+    'plugin:vue/vue3-recommended',
     'plugin:prettier/recommended',
   ],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-underscore-dangle': 'off',
+    'no-unused-vars': 'off',
+    'no-param-reassign': ['error', { props: false }],
     'vue/html-indent': ['error', 2],
     'vue/no-v-html': 'off',
-    // 'import/extensions': ['error', 'always'],
+    'import/extensions': ['error', 'never', { svg: 'always' }],
+    'import/no-unresolved': 'off',
   },
   settings: {
     'import/resolver': {
       alias: {
         map: [['^~', path.resolve(__dirname, './src')]],
-        extensions: ['.js', '.vue'],
+        extensions: ['.{j,t}s?(x)', '.vue'],
       },
     },
   },
@@ -34,7 +39,8 @@ module.exports = {
       files: 'src/main.js',
       rules: {
         'func-names': ['off'],
-        'no-unused-vars': ['error', {'args': 'none'}],
+        'no-unused-vars': ['error', { args: 'none' }],
+        'import/extensions': 'off',
       },
     },
     {
@@ -45,6 +51,9 @@ module.exports = {
       env: {
         jest: true,
       },
+    },
+    {
+      files: ['**/*.{j,t}s?(x)', '**/*.vue'],
     },
   ],
 }

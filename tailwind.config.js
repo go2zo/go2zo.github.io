@@ -82,7 +82,7 @@ module.exports = {
       },
       letterSpacing: {
         'little-tight': '-0.15px',
-        'little-wide': '0.15px'
+        'little-wide': '0.15px',
       },
       transitionProperty: {
         'text-decoration': 'text-decoration',
@@ -119,6 +119,6 @@ module.exports = {
     require('tailwindcss-text-indent')(),
     require('./plugins/decoration-color'),
     require('./plugins/font-variant'),
-    require('./plugins/word-spacing')
+    require('./plugins/word-spacing'),
   ],
 }
