@@ -4,7 +4,7 @@ slug: husky-v6
 date: 2021-05-23
 author: [go2zo]
 tags: ['husky', 'til']
-excerpt: "프로젝트에서 lint-staged를 설치해보니 husky"
+excerpt: "husky v6으로 버전업 되며 바뀐점을 간략히 체크해봤다."
 published: true
 series: false
 ---

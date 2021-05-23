@@ -36,7 +36,7 @@ module.exports = {
 보다 권장되는 설정은 `eslint-config-prettier`를 이용하는 것이다.
 
 ```bash
-$ yarn add -D eslint-config-prettier
+yarn add -D eslint-config-prettier
 ```
 
 `eslint-config-prettier`는 prettier 룰과 충돌하는 eslint룰을 off해주고 `extends` 설정을 지원한다.
@@ -69,7 +69,7 @@ Gridsome을 위한 eslint의 공식 플러그인(`eslint-plugin-gridsome`)을 �
 `eslint-plugin-gridsome`이 `vue-eslint-parser` ^6.0.4 버전 이상을 사용하므로 함께 설치한다.
 
 ```bash
-$ yarn add -D eslint-plugin-gridsome vue-eslint-parser
+yarn add -D eslint-plugin-gridsome vue-eslint-parser
 ```
 
 `.eslintrc.js` 파일에 직접 플러그인을 설정해도 되지만 아래와 같이 extends로 간편하게 설정할 수 있다.
