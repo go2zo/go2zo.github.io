@@ -15,7 +15,7 @@ Husky는 node 환경에서 git hook 제어를 용이하게 해 주는 툴이다.
 
 husky를 설치하면 모든 git hook은 husky를 실행하도록 설정된다. 실제로 husky를 설치하고 `.git/hook` 디렉토리를 확인하면 모든 hook 파일들이 활성화(.sample이 붙어있지 않은 파일들) 되어 있는 것을 볼 수 있다. husky에 의해 생성된 파일들은 수동으로 변경하지 않아야 한다(~~고 알고 있다~~). 어차피 변경을 해도 변경사항은 공유되지 않을 것이다.
 
-![image-20201113161622506](images/image-20201113161622506.png)
+![image-20201113161622506](./images/image-20201113161622506.png)
 
 ## Lint-staged & Husky 설치
 
