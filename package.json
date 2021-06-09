@@ -1,6 +1,6 @@
 {
   "name": "gridsome-blog",
-  "private": true,
+  "private": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/go2zo/go2zo.github.io/"
@@ -10,16 +10,19 @@
     "email": "go2zo.ooo@gmainl.com",
     "url": "http://go2zo.github.io/"
   },
+  "license": "MIT",
   "scripts": {
     "build": "gridsome build",
     "deploy": "gridsome build && gh-pages -d dist",
     "develop": "gridsome develop",
     "explore": "gridsome explore",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "yarn lint:js && yarn lint:style",
+    "lint:js": "eslint --ext \".js,.vue\" .",
+    "lint:style": "stylelint \"**/*.{vue,css,scss}\" --ignore-path .gitignore",
     "prepare": "husky install"
   },
   "dependencies": {
+    "@tailwindcss/postcss7-compat": "^2.0.3",
     "gridsome": "^0.7.0",
     "lodash": "^4.17.21",
     "prism-themes": "^1.6.0",
@@ -29,10 +32,11 @@
     "vue-feather-icons": "^5.1.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
     "@gridsome/remark-prismjs": "^0.5.0",
     "@gridsome/source-filesystem": "^0.6.2",
     "@gridsome/transformer-remark": "^0.6.4",
-    "@tailwindcss/postcss7-compat": "^2.0.3",
     "eslint": "^7.21.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.1.0",
@@ -51,9 +55,11 @@
     "prettier": "2.2.1",
     "sass-loader": "^10.1.1",
     "stylelint": "^13.12.0",
+    "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^21.0.0",
     "stylelint-scss": "^3.19.0",
     "svg-to-vue-component": "^0.3.8",
+    "tailwindcss-plugin-fancy": "^2.12.0",
     "tailwindcss-text-indent": "^1.0.2",
     "vue-eslint-parser": "^7.6.0",
     "webpack-node-externals": "^2.5.2"

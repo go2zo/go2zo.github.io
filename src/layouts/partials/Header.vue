@@ -1,11 +1,11 @@
 <template>
   <header>
     <div class="header-bar"></div>
-    <div class="container flex gap-8 header-inner">
+    <div class="header-inner container flex gap-8">
       <Logo />
       <Nav class="flex flex-1" />
       <SearchForm class="flex-auto" />
-      <nav class="flex header-actions">
+      <nav class="header-actions flex">
         <ToggleTheme />
         <a
           aria-label="Github"
@@ -53,7 +53,7 @@ export default {
 
 <style lang="scss">
 header {
-  @apply z-20 top-0 bg-90 border-b border-primary flex-nowrap sticky transition-colors duration-300;
+  @apply bg-90 border-primary flex-nowrap sticky top-0 z-20 transition-colors duration-300 border-b;
 
   .header-bar {
     @apply bg-gradient-to-r from-primary via-blue-300 to-pink-600 p-0.5 text-center text-white text-base;
@@ -64,7 +64,7 @@ header {
   }
 
   .header-inner {
-    @apply px-x1 py-0 items-center h-12;
+    @apply px-x1 items-center h-12 py-0;
     min-height: 58px;
   }
 

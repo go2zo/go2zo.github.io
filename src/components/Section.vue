@@ -1,6 +1,6 @@
 <template>
   <section class="section" :class="sectionClass">
-    <div class="container section--inner" :class="sectionClassInner">
+    <div class="section--inner container" :class="sectionClassInner">
       <slot />
     </div>
     <div v-if="dots" class="section__dots-bg dogs-bg" />
@@ -39,15 +39,15 @@ export default {
 
 <style lang="scss">
 .section {
-  @apply relative w-full flex-1;
+  @apply relative flex-1 w-full;
   padding: calc(2% + var(--space)) 0;
 
   &--secondary {
-    @apply bg-secondary border-t border-b border-primary;
+    @apply bg-secondary border-primary border-t border-b;
   }
 
   &__dots-bg {
-    @apply h-175 max-w-375 max-h-full mx-auto my-0 absolute inset-x-0 bottom-0 opacity-100;
+    @apply h-175 max-w-375 absolute inset-x-0 bottom-0 max-h-full mx-auto my-0 opacity-100;
     z-index: 1;
   }
 
@@ -57,7 +57,7 @@ export default {
   }
 
   &--dark {
-    @apply text-white bg-dark;
+    @apply bg-dark text-white;
 
     p {
       @apply text-current;

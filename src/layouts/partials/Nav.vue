@@ -1,5 +1,5 @@
 <template>
-  <nav class="flex items-center gap-4 flex-nowrap">
+  <nav class="flex-nowrap flex items-center gap-4">
     <g-link to="/blog">
       <span class="nav__label">Blog</span>
     </g-link>

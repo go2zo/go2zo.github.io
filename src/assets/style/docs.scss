@@ -12,7 +12,7 @@
   h1, h2, h3 {
     @apply pt-24 -mt-20;
 
-    a:first {
+    a:first-child {
       @apply float-left top-0.5 -ml-0.5 text-sm text-center;
       @apply opacity-0 text-primary-dark shadow-none bg-none;
       width: 0.8em;

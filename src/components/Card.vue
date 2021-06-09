@@ -35,29 +35,29 @@ export default {
 
 <style lang="scss">
 .card {
-  @apply border border-darker rounded bg relative;
-  @apply transition duration-300 z-1;
+  @apply border-darker bg relative border rounded;
+  @apply z-1 transition duration-300;
 
   &__title {
-    @apply text-center w-full -mt-4;
+    @apply w-full -mt-4 text-center;
 
     span {
       @apply inline-block px-3 pt-0.5 pb-1 bg-dark;
-      @apply text-white font-medium text-base tracking-wide rounded;
+      @apply text-base font-medium tracking-wide text-white rounded;
     }
   }
 
   &__image {
-    @apply rounded-t rounded-b-none border-b border-primary;
+    @apply border-primary border-b rounded-t rounded-b-none;
     @apply overflow-hidden transition-colors duration-300;
 
     img {
-      @apply m-0 w-full;
+      @apply w-full m-0;
     }
   }
 
   &__inner {
-    @apply p-x1 overflow-hidden relative;
+    @apply p-x1 relative overflow-hidden;
   }
 
   &[class*='container'] &__inner {
@@ -65,17 +65,17 @@ export default {
   }
 
   .section--dark & {
-    @apply bg-dark border-white opacity-10;
+    @apply bg-dark opacity-10 border-white;
   }
 
   &__link {
-    @apply absolute top-0 left-0 w-full h-full opacity-0 z-1;
-    @apply overflow-hidden indent-full whitespace-nowrap; /** Scott Kellum Method */
+    @apply z-1 absolute top-0 left-0 w-full h-full opacity-0;
+    @apply indent-full whitespace-nowrap overflow-hidden; /** Scott Kellum Method */
     @apply focus:opacity-100 focus:outline;
   }
 
   a:not(.card__link) {
-    @apply relative z-1;
+    @apply z-1 relative;
   }
 
   &--has-link:hover {

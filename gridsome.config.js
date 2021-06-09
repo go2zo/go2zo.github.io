@@ -15,24 +15,27 @@ module.exports = {
   },
   chainWebpack: (config, { isServer }) => {
     config.module.rules.delete('svg')
-    config.module.rule('svg')
+    config.module
+      .rule('svg')
       .test(/\.svg$/)
       .use('vue')
       .loader('vue-loader')
-        .end()
+      .end()
       .use('svg-to-vue-component')
       .loader('svg-to-vue-component/loader')
 
     if (isServer) {
-      config.externals(nodeExternals({
-        allowlist: [
-          /\.css$/,
-          /\?vue&type=style/,
-          /vue-instantsearch/,
-          /instantsearch.js/,
-          /typeface-league-spartan/
-         ]
-      }))
+      config.externals(
+        nodeExternals({
+          allowlist: [
+            /\.css$/,
+            /\?vue&type=style/,
+            /vue-instantsearch/,
+            /instantsearch.js/,
+            /typeface-league-spartan/,
+          ],
+        })
+      )
     }
   },
 
@@ -41,10 +44,10 @@ module.exports = {
   },
   plugins: [
     {
-      use: "gridsome-plugin-extract-schema",
+      use: 'gridsome-plugin-extract-schema',
       options: {
-        dest: `${__dirname}/src/.temp/schema.json` // Default
-      }
+        dest: `${__dirname}/src/.temp/schema.json`, // Default
+      },
     },
     {
       use: '@gridsome/source-filesystem',
@@ -56,9 +59,9 @@ module.exports = {
           tags: {
             typeName: 'Tag',
             create: true,
-          }
+          },
         },
-      }
+      },
     },
     {
       use: 'gridsome-plugin-tailwindcss',
@@ -66,9 +69,7 @@ module.exports = {
   ],
   transformers: {
     remark: {
-      plugins: [
-        '@gridsome/remark-prismjs'
-      ]
-    }
-  }
+      plugins: ['@gridsome/remark-prismjs'],
+    },
+  },
 }
