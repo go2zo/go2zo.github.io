@@ -1,10 +1,10 @@
 ---
-title: [Resolved] Could not target platform: 'Java SE 11' using tool chain: 'JDK 8 (1.8)'
+title: Could not target platform: 'Java SE 11' using tool chain: 'JDK 8 (1.8)'
 slug: could-not-target-platform-java-se-11-using-tool-chain-jdk-1-1.8
 date: 2021-06-09
 author: [go2zo]
 tags: ['gradle', 'jdk', 'resolved']
-excerpt: "JDK 11로 버전업을 한 이후 IntelliJ에서 Gradle Task를 실행하는 것은 잘 되었지만 터미널에서 ./gradlew build 명령을 실행하면 여전히 에러가 발생하였다. 문제는 오히려 간단하였고 "
+excerpt: "JDK 11로 버전업을 한 이후 IntelliJ에서 Gradle Task를 실행하는 것은 잘 되었지만 터미널에서 ./gradlew build 명령을 실행하면 여전히 에러가 발생하였다."
 published: true
 series: false
 ---
