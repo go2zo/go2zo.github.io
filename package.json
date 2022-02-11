@@ -51,7 +51,7 @@
     "gridsome-plugin-tailwindcss": "^4.1.0",
     "husky": ">=6",
     "lint-staged": "^10.5.4",
-    "node-sass": "^5.0.0",
+    "node-sass": "^7.0.0",
     "prettier": "2.2.1",
     "sass-loader": "^10.1.1",
     "stylelint": "^13.12.0",
